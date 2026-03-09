@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  #  Service PostgreSQL
+  db:
+    image: postgres:15
+    container_name: stage_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: chaima        # utilisateur PostgreSQL
+      POSTGRES_PASSWORD: chaima123 # mot de passe
+      POSTGRES_DB: stage_db        # nom de la base de données
+    ports:
+      - "5432:5432"                # pour accéder à PostgreSQL depuis localhost
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  # Service Backend (Express + Prisma)
+  backend:
+    build: ./backend               # chemin vers dossier backend
+    container_name: stage_backend
+    restart: always
+    ports:
+      - "3000:3000"                # port pour Express
+    environment:
+      DATABASE_URL: "postgresql://chaima:chaima123@db:5432/stage_db?schema=public"
+    depends_on:
+      - db                         # backend démarre après db
+
+volumes:
+  db_data:                         # volume persistant pour PostgreSQL
