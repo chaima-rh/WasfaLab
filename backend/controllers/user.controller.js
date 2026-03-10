@@ -1,5 +1,6 @@
 // backend/src/controllers/user.controller.js
-import { prisma } from "../prisma.js";
+import { PrismaClient } from "@prisma/client";
+export const prisma = new PrismaClient();
 import bcrypt from "bcryptjs";
 
 /**

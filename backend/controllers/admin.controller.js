@@ -1,4 +1,4 @@
-import { prisma } from "../prisma.js";
+import { prisma } from "../prismaClient.js";
 
 // Recipes waiting approval
 export const getPendingRecettes = async (req, res) => {

@@ -23,7 +23,7 @@ model User {
   username     String   @unique
   email        String   @unique
   password     String
-  imageProfile String  
+  imageProfile String?  
   role         Role     @default(USER)
   recipes      Recipe[] @relation("UserRecipes")
   favorites    Favorite[]

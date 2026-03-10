@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  #  Service PostgreSQL
+  # Service PostgreSQL
   db:
     image: postgres:15
     container_name: stage_postgres
@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: chaima        # utilisateur PostgreSQL
       POSTGRES_PASSWORD: chaima123 # mot de passe
-      POSTGRES_DB: stage_db        # nom de la base de données
+      POSTGRES_DB: recettes_db     # nom de la base de données
     ports:
       - "5432:5432"                # pour accéder à PostgreSQL depuis localhost
     volumes:
@@ -23,7 +23,7 @@ services:
     ports:
       - "3000:3000"                # port pour Express
     environment:
-      DATABASE_URL: "postgresql://chaima:chaima123@db:5432/stage_db?schema=public"
+      DATABASE_URL: "postgresql://chaima:chaima123@db:5432/recettes_db?schema=public"
     depends_on:
       - db                         # backend démarre après db
 
